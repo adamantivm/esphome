@@ -9,6 +9,7 @@ from esphome.components.esp32 import (
     add_idf_component,
     add_idf_sdkconfig_option,
     add_partition,
+    get_board,
     require_vfs_select,
 )
 import esphome.config_validation as cv
@@ -283,6 +284,9 @@ async def attributes_to_code(
 
 
 async def esp32_to_code(config: ConfigType) -> "MockObj":
+    if get_board() == "seeed_xiao_esp32c6":
+        cg.add_define("USE_XIAO_ESP32C6_RF_SWITCH")
+
     add_idf_component(
         name="espressif/esp-zigbee-lib",
         ref="2.0.4",
