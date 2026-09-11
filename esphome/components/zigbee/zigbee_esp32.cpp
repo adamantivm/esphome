@@ -282,7 +282,14 @@ ZigbeeComponent::ZigbeeComponent() {
 
   gpio_reset_pin(GPIO_NUM_14);
   gpio_set_direction(GPIO_NUM_14, GPIO_MODE_OUTPUT);
-  gpio_set_level(GPIO_NUM_14, 0);
+  gpio_set_level(GPIO_NUM_14, XIAO_ESP32C6_RF_ANTENNA_SELECT);
+
+  ESP_LOGI(
+      TAG,
+      "XIAO ESP32-C6 Zigbee antenna: %s",
+      XIAO_ESP32C6_RF_ANTENNA_SELECT ? "external" : "internal"
+  );
+
 #endif
   esp_zigbee_platform_config_t platform_config = {
       .storage_partition_name = "nvs",
